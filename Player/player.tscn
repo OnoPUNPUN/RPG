@@ -6,7 +6,8 @@
 [ext_resource type="Script" uid="uid://dbrmde4p4gvjc" path="res://Player/scripts/StateIdle.cs" id="4_gwnis"]
 [ext_resource type="Script" uid="uid://h8nh5qdaigi8" path="res://Player/scripts/StateWalk.cs" id="5_k53q1"]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_hvlyn"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_k53q1"]
+radius = 13.038404
 
 [sub_resource type="Animation" id="Animation_4ntmi"]
 length = 0.001
@@ -138,12 +139,17 @@ _data = {
 
 [node name="Player" type="CharacterBody2D" unique_id=1520514873]
 position = Vector2(241, 107)
+collision_mask = 16
+motion_mode = 1
+wall_min_slide_angle = 0.17453292
 script = ExtResource("1_4ntmi")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=16094302]
-shape = SubResource("CapsuleShape2D_hvlyn")
+position = Vector2(-1, 0)
+shape = SubResource("CircleShape2D_k53q1")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=994933462]
+position = Vector2(0, -18)
 texture = ExtResource("1_4flbx")
 hframes = 21
 
@@ -158,3 +164,5 @@ script = ExtResource("4_gwnis")
 
 [node name="Walk" type="Node" parent="SateMachine" unique_id=2133437344]
 script = ExtResource("5_k53q1")
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1024925136]
