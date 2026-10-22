@@ -6,10 +6,12 @@ public partial class StateWalk : State
 	float MoveSpeed = 100.0f;
 
 	private State idle;
+	private State attack;
 
 	public override void _Ready()
 	{
 		idle = GetNode<State>("../Idle");
+		attack = GetNode<State>("../Attack");
 	}
 	public override void Enter()
 	{
@@ -42,8 +44,12 @@ public partial class StateWalk : State
 		return null;
 	}
 
-	public override State HandleInput(InputEvent inputEvent)
+	public override State HandleInput(InputEvent _event)
 	{
+		if(_event.IsActionPressed("attack"))
+		{
+			return attack;
+		}
 		return null;
 	}
 }

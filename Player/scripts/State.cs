@@ -26,7 +26,7 @@ public partial class State : Node
 		return null;
 	}
 
-	public virtual State HandleInput(InputEvent inputEvent)
+	public virtual State HandleInput(InputEvent _event)
 	{
 		return null;
 	}

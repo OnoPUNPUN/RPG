@@ -4,10 +4,18 @@ public partial class StateIdle : State
 {
 
 	private State walk;
+	private State attack;
+
+    public override void _Ready()
+    {
+        walk = GetNode<State>("../Walk");
+		attack = GetNode<State>("../Attack");
+    }
+
 	public override void Enter()
 	{
 		player.UpdateAnimation("idle");
-		walk = GetNode<State>("../Walk");
+		
 	}
 
 	public override void Exit()
@@ -29,8 +37,12 @@ public partial class StateIdle : State
 		return null;
 	}
 
-	public override State HandleInput(InputEvent inputEvent)
+	public override State HandleInput(InputEvent _event)
 	{
+		if(_event.IsActionPressed("attack"))
+		{
+			return attack;
+		}
 		return null;
 	}
 }
