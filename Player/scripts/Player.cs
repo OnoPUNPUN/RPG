@@ -10,6 +10,9 @@ public partial class Player : CharacterBody2D
 	private Sprite2D sprite;
 	private PlayerStateMachine stateMachine;
 
+	[Signal]
+	public delegate void DirectionChangedEventHandler(Vector2 newDirection);
+
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
@@ -60,7 +63,7 @@ public partial class Player : CharacterBody2D
 		}
 
 		CardinalDirection = NewDirection;
-
+		EmitSignal(SignalName.DirectionChanged, NewDirection);
 		sprite.Scale = new Vector2(CardinalDirection == Vector2.Left ? -1 : 1, sprite.Scale.Y);
 
 		return true;
