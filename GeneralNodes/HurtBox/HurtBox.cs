@@ -19,7 +19,7 @@ public partial class HurtBox : Area2D
 
 	private void OnAreaEntered(Area2D area)
 	{
-		if(area is HitBox hitBox)
+		if (area is HitBox hitBox)
 		{
 			hitBox.TakeDamage(damage);
 		}

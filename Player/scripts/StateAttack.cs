@@ -28,7 +28,7 @@ public partial class StateAttack : State
 		animationPlayer = GetNode<AnimationPlayer>("../../AnimationPlayer");
 		attackAnimation = GetNode<AnimationPlayer>("../../Sprite2D/AttackEffectSprite/AttackAnimationPlayer");
 		audio = GetNode<AudioStreamPlayer2D>("../../Audio/AudioStreamPlayer2D");
-		hurtBox = GetNode<HurtBox>("../../Interactions/HurtBox");
+		hurtBox = GetNode<HurtBox>("../../Sprite2D/AttackHurtBox");
 	}
 
 	public override void Enter()
