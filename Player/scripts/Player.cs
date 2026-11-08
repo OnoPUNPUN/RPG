@@ -1,6 +1,8 @@
 using Godot;
 using System;
+using System.Collections.Generic;
 using System.Data;
+using System.Linq;
 
 public partial class Player : CharacterBody2D
 {
@@ -9,6 +11,7 @@ public partial class Player : CharacterBody2D
 	private AnimationPlayer animationPlayer;
 	private Sprite2D sprite;
 	private PlayerStateMachine stateMachine;
+	private static readonly Vector2[] DIR_4 = { Vector2.Right, Vector2.Down, Vector2.Left, Vector2.Up };
 
 	[Signal]
 	public delegate void DirectionChangedEventHandler(Vector2 newDirection);
@@ -40,22 +43,21 @@ public partial class Player : CharacterBody2D
 
 	public bool SetDirection()
 	{
-		Vector2 NewDirection = CardinalDirection;
-
 		if (Direction == Vector2.Zero)
 		{
 			return false;
 		}
 
-		if (Direction.Y == 0)
+
+		// This took long to figure out my player was moon walking when pressing to button Don't dare to touch this code
+		float angle = Direction.Angle() + CardinalDirection.Angle() * 0.1f;
+		if (angle < 0)
 		{
-			NewDirection = Direction.X < 0 ? Vector2.Left : Vector2.Right;
-		}
-		else if (Direction.X == 0)
-		{
-			NewDirection = Direction.Y < 0 ? Vector2.Up : Vector2.Down;
+			angle += float.Tau;
 		}
 
+		int directionId = (int)Math.Round(angle / float.Tau * DIR_4.Length) % DIR_4.Length;
+		var NewDirection = DIR_4[directionId];
 
 		if (NewDirection == CardinalDirection)
 		{
